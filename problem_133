@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Student {
+    int roll;
+    int marks_count;
+    int marks[];   // Flexible array member
+};
+
+int main() {
+    int n, i;
+    
+    printf("Enter how many marks you want to store: ");
+    scanf("%d", &n);
+
+    // Allocate memory for structure + flexible array
+    struct Student *s = malloc(sizeof(struct Student) + n * sizeof(int));
+
+    s->marks_count = n;
+
+    printf("Enter Roll Number: ");
+    scanf("%d", &s->roll);
+
+    printf("Enter %d marks:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &s->marks[i]);
+    }
+
+    printf("\nStored Data:\n");
+    printf("Roll Number: %d\n", s->roll);
+    printf("Marks: ");
+    for(i = 0; i < n; i++) {
+        printf("%d ", s->marks[i]);
+    }
+
+    free(s); // free dynamically allocated memory
+    return 0;
+}
